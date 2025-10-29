@@ -277,30 +277,30 @@ def check_requirements(
                 s += f'"{r}" '
                 n += 1
 
-    if s:
-        if install and AUTOINSTALL:  # check environment variable
-            LOGGER.info(
-                f"{prefix} Ultralytics requirement{'s' * (n > 1)} {s}not found, attempting AutoUpdate..."
-            )
-            print("Start Autoinstall")
-            try:
-                assert is_online(), "AutoUpdate skipped (offline)"
-                print(f"run pip install {cmds}")
-                LOGGER.info(
-                    subprocess.check_output(
-                        f"pip install --no-cache {s} {cmds}", shell=True
-                    ).decode()
-                )
-                s = (
-                    f"{prefix} {n} package{'s' * (n > 1)} updated per {file or requirements}\n"
-                    f"{prefix} ⚠️ {colorstr('bold', 'Restart runtime or rerun command for updates to take effect')}\n"
-                )
-                LOGGER.info(s)
-            except Exception as e:
-                LOGGER.warning(f"{prefix} ❌ {e}")
-                return False
-        else:
-            return False
+    # if s:
+    #     if install and AUTOINSTALL:  # check environment variable
+    #         LOGGER.info(
+    #             f"{prefix} Ultralytics requirement{'s' * (n > 1)} {s}not found, attempting AutoUpdate..."
+    #         )
+    #         print("Start Autoinstall")
+    #         try:
+    #             assert is_online(), "AutoUpdate skipped (offline)"
+    #             print(f"run pip install {cmds}")
+    #             LOGGER.info(
+    #                 subprocess.check_output(
+    #                     f"pip install --no-cache {s} {cmds}", shell=True
+    #                 ).decode()
+    #             )
+    #             s = (
+    #                 f"{prefix} {n} package{'s' * (n > 1)} updated per {file or requirements}\n"
+    #                 f"{prefix} ⚠️ {colorstr('bold', 'Restart runtime or rerun command for updates to take effect')}\n"
+    #             )
+    #             LOGGER.info(s)
+    #         except Exception as e:
+    #             LOGGER.warning(f"{prefix} ❌ {e}")
+    #             return False
+    #     else:
+    #         return False
 
     return True
 
